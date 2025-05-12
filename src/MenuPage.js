@@ -3,7 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/1kk3XTPTX4DYAo4cg6JGu0JIkcf1bzYkUGH2Ha9t1WYw/pubhtml";
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzb29ZHSe0DYDK7DIxdkw_FYMNF07ElwZNMVK5fBibyAjnBRN6H-D-CHS-HEexD01bmDW6I0WzbsZ7/pubhtml";
 
 export default function MenuPage() {
   const [items, setItems] = useState([]);
