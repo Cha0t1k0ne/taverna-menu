@@ -1,11 +1,7 @@
-// React app to display menu from Google Sheets
-// Will use Tabletop.js for fetching data
-
 import React, { useEffect, useState } from "react";
+import Papa from "papaparse";
 
-const SHEET_URL = "https://docs.google.com/spreadsheets/d/1kk3XTPTX4DYAo4cg6JGu0JIkcf1bzYkUGH2Ha9t1WYw/pubhtml";
-
-
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzb29ZHSe0DYDK7DIxdkw_FYMNF07ElwZNMVK5fBibyAjnBRN6H-D-CHS-HEexD01bmDW6I0WzbsZ7/pub?output=csv";
 
 export default function MenuPage() {
   const [items, setItems] = useState([]);
@@ -14,18 +10,17 @@ export default function MenuPage() {
   const [activeCategory, setActiveCategory] = useState(null);
 
   useEffect(() => {
-    import("tabletop").then(({ default: Tabletop }) => {
-      Tabletop.init({
-        key: SHEET_URL,
-        simpleSheet: true,
-        callback: (data) => {
-          const availableItems = data.filter(item => item.Available?.toLowerCase() === "true");
-          setItems(availableItems);
+    Papa.parse(CSV_URL, {
+      download: true,
+      header: true,
+      complete: (results) => {
+        const data = results.data;
+        const availableItems = data.filter(item => item.Available?.toLowerCase() === "true");
+        setItems(availableItems);
 
-          const uniqueCategories = [...new Set(availableItems.map(i => i.Category))];
-          setCategories(uniqueCategories);
-        }
-      });
+        const uniqueCategories = [...new Set(availableItems.map(i => i.Category))];
+        setCategories(uniqueCategories);
+      }
     });
   }, []);
 

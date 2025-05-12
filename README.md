@@ -1,3 +1,3 @@
 # Taverna Menu
 
-This is a React app to display a live menu from Google Sheets.
+Live restaurant menu powered by Google Sheets (CSV) and PapaParse.
