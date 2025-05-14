@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Papa from "papaparse";
 
-const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzb29ZHSe0DYDK7DIxdkw_FYMNF07ElwZNMVK5fBibyAjnBRN6H-D-CHS-HEexD01bmDW6I0WzbsZ7/pub?output=csv";
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRoF4Cw1dK7hSo00N8MF4yklfnfqRdNP3AjrP8xxwLX0k57OqPwZV7q_SmjqxaeDlhbJJzsQSVYd0It/pub?output=csv";
 
 export default function MenuPage() {
   const [items, setItems] = useState([]);
