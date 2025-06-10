@@ -16,7 +16,7 @@ export default function MenuPage() {
       complete: (results) => {
         const data = results.data;
         const availableItems = data
-          .filter(item => item.Available?.toLowerCase() === "true")
+          .filter(item => item.Available?.trim().toLowerCase() === "true")
           .map(item => ({
             ...item,
             Category: item.Category?.trim() || "",
