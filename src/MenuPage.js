@@ -15,12 +15,20 @@ export default function MenuPage() {
       header: true,
       complete: (results) => {
         const data = results.data;
-        const availableItems = data.filter(item => item.Available?.toLowerCase() === "true");
+        const availableItems = data
+          .filter(item => item.Available?.toLowerCase() === "true")
+          .map(item => ({
+            ...item,
+            Category: item.Category?.trim() || "",
+          }));
+
         setItems(availableItems);
 
-        const uniqueCategories = [...new Set(availableItems.map(i => i.Category))];
+        const uniqueCategories = [
+          ...new Set(availableItems.map(i => i.Category).filter(Boolean)),
+        ];
         setCategories(uniqueCategories);
-      }
+      },
     });
   }, []);
 
@@ -88,7 +96,8 @@ function translateCategory(grCategory) {
     "ΠΙΑΤΑ ΤΗΣ ΩΡΑΣ": "COOKED TO ORDER",
     "ΑΝΑΨΥΚΤΙΚΑ-ΜΠΥΡΕΣ": "REFRESHMENTS-BEERS",
     "ΚΡΑΣΙ": "WINE",
-    "ΠΟΤΑ": "DRINKS"
+    "ΠΟΤΑ": "DRINKS",
   };
-  return dictionary[grCategory] || grCategory;
+  const key = grCategory.trim().toUpperCase();
+  return dictionary[key] || grCategory.trim();
 }
